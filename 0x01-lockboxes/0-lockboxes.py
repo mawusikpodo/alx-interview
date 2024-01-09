@@ -1,39 +1,18 @@
 #!/usr/bin/python3
+"""Lockboxes Contains method that finds the keys to
+open other lockboxes
+"""
+
 
 def canUnlockAll(boxes):
-    """
-    Determines if all the boxes can be opened.
+    unlocked = set()
 
-    Args:
-    - boxes (list of lists): A list where each element is a list of keys present in a box.
-
-    Returns:
-    - bool: True if all boxes can be opened, False otherwise.
-    """
-    # Set to keep track of opened boxes
-    opened_boxes = set()
-
-    def dfs(box_number):
-        """
-        Depth-first search to explore the boxes.
-
-        Args:
-        - box_number (int): The current box number to explore.
-        """
-        # If the box is already opened, return
-        if box_number in opened_boxes:
-            return
-
-        # Mark the box as opened
-        opened_boxes.add(box_number)
-
-        # Explore the keys in the current box
-        for key in boxes[box_number]:
-            dfs(key)
-
-    # Start DFS from the first box
-    dfs(0)
-
-    # Check if all boxes are opened
-    return len(opened_boxes) == len(boxes)
-
+    for box_id, box in enumerate(boxes):
+        if len(box) == 0 or box_id == 0:
+            unlocked.add(box_id)
+        for key in box:
+            if key < len(boxes) and key != box_id:
+                unlocked.add(key)
+        if len(unlocked) == len(boxes):
+            return True
+    return False
