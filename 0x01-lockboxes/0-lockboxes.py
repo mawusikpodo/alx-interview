@@ -20,8 +20,3 @@ def canUnlockAll(boxes):
     
     # Check if all boxes are opened
     return len(opened_boxes) == len(boxes)
-
-# Example usage:
-boxes = [[1], [2], [3], []]
-result = canUnlockAll(boxes)
-print(result)  # Output: True
